@@ -1,5 +1,5 @@
 from flask import Flask,request
-from flask_cors import CORS 
+from flask_cors import CORS
 import psycopg2
 
 app = Flask(__name__)
