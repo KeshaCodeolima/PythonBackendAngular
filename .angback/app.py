@@ -22,7 +22,7 @@ CREATE_TABLE =""" CREATE TABLE IF NOT EXISTS angularone (
 INSERT_INFO = """INSERT INTO angularone (name,email,phonenumber,password) 
                  VALUES (%s,%s,%s,%s)"""
 
-SELECT_INFO = """ SELECT * FROM angularone WHERE email= %s """
+SELECT_INFO = """ SELECT * FROM angularone WHERE email= %s AND password= %s """
 
 UPDATE_INFO = """ UPDATE angularone SET password= %s WHERE email= %s """
 
@@ -45,9 +45,10 @@ def register():
 def login():
     data = request.get_json()
     email=data["email"]
+    password=data["password"]
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute(SELECT_INFO,(email,))
+            cursor.execute(SELECT_INFO,(email,password,))
             user_email = cursor.fetchone()
 
             if user_email:
