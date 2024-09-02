@@ -24,6 +24,8 @@ INSERT_INFO = """INSERT INTO angularone (name,email,phonenumber,password)
 
 SELECT_INFO = """ SELECT * FROM angularone WHERE email= %s """
 
+SELECT_INFO2=""" SELECT * FROM angularone WHERE email= %s AND password= %s"""
+
 UPDATE_INFO = """ UPDATE angularone SET password= %s WHERE email= %s """
 
 DELETE_INFO = """ DELETE FROM angularone WHERE email= %s"""
@@ -48,7 +50,7 @@ def login():
     password=data["password"]
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute(SELECT_INFO,(email,password,))
+            cursor.execute(SELECT_INFO2,(email,password,))
             user_email = cursor.fetchone()
 
             if user_email:
