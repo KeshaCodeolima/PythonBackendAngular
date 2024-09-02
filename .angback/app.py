@@ -22,7 +22,7 @@ CREATE_TABLE =""" CREATE TABLE IF NOT EXISTS angularone (
 INSERT_INFO = """INSERT INTO angularone (name,email,phonenumber,password) 
                  VALUES (%s,%s,%s,%s)"""
 
-SELECT_INFO = """ SELECT * FROM angularone WHERE email= %s AND password= %s """
+SELECT_INFO = """ SELECT * FROM angularone WHERE email= %s """
 
 UPDATE_INFO = """ UPDATE angularone SET password= %s WHERE email= %s """
 
