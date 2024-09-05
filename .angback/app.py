@@ -33,6 +33,8 @@ UPDATE_INFO = """ UPDATE angularone SET password= %s WHERE email= %s """
 
 DELETE_INFO = """ DELETE FROM angularone WHERE email= %s"""
 
+SECRET_KEY ="erhifhdh@49938djk"
+
 @app.post("/register")
 def register():
     data = request.get_json()
@@ -107,13 +109,16 @@ def forget():
                 receiver_email = email
                 password = "vyyr wswn uknj ahvp"
 
+
+                reset_link = f"http://localhost:4200/froget"
+
                 subject = "Password Reset Link."
-                body = """
+                body = f"""
                 Hi, 
 
                 We received a request to reset your password. If this was you, click the link below to reset it:
-                <reset-link-here>
-
+                        {reset_link}
+                This Email link expire in 2 minutes.
                 If this wasn't you, please ignore this email.
                 """
 
