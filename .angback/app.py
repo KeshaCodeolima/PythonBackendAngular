@@ -95,7 +95,7 @@ def delete():
         else:
             return{"message":"User Not Fount"},404
 
-@app.post("/forget")
+@app.post("/forgetemail")
 def forget():
     data = request.get_json()
     email = data["email"]
