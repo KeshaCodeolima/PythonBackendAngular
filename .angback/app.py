@@ -139,6 +139,44 @@ def forget():
                 return{"message" : "Email send fail because of : "+ str(e)} 
         else:
             return{"message" : "Email not found."}
+        
+
+@app.post("/usercomment")
+def usercomment():
+    data = request.get_json()
+    name = data["name"]
+    email = data["email"]
+    message = data["message"]
+    
+    try:
+        sender_email = "kulasekarakeshan41@gmail.com"
+        receiver_email = sender_email
+        password = "vyyr wswn uknj ahvp"
+        subject = "Customer Comment Mails."
+        body = f"""
+                Hi,
+                I'am {name}
+                {message}
+                My Email Address is {email}
+                Thank You.
+                """
+
+        message = MIMEMultipart()
+        message["From"] = sender_email
+        message["To"] = receiver_email
+        message["Subject"] = subject
+
+        message.attach(MIMEText(body, "plain"))
+
+        with smtplib.SMTP("smtp.gmail.com",587)as server:
+            server.starttls()
+            server.login(sender_email, password)
+            text = message.as_string()
+            server.sendmail(sender_email,receiver_email,text)
+            return{"message" : "Email Send Successful"},201
+        
+    except Exception as e:
+        return{"message" : "Email send fail because of : "+ str(e)} 
 
         
 if __name__ == "__main__":
